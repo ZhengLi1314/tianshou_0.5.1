@@ -110,5 +110,8 @@ class RunningMeanStd(object):
         m_2 = m_a + m_b + delta**2 * self.count * batch_count / total_count
         new_var = m_2 / total_count
 
+        #limit the size of var
+        new_var = abs(np.log(new_var+1))
+
         self.mean, self.var = new_mean, new_var
         self.count = total_count
